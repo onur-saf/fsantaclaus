@@ -29,6 +29,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: testnet
+    env:
+      NEXT_PUBLIC_FSANTA_TOKEN_ADDRESS: ${{ vars.NEXT_PUBLIC_FSANTA_TOKEN_ADDRESS }}
+      NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS: ${{ vars.NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
