@@ -1,14 +1,14 @@
 'use client';
 
+import { FSantaClausABI } from '@/abis/FSantaClaus';
+import { FSantaClausStakingABI } from '@/abis/FSantaClausStakingABI'; // Import your ABI
+import { getAbi } from '@/server-actions/get-abi';
+import { notifications } from '@mantine/notifications';
 import {
   useReadContract,
   useWriteContract,
   UseWriteContractReturnType,
 } from 'wagmi';
-import { FSantaClausStakingABI } from '@/abis/FSantaClausStakingABI'; // Import your ABI
-import { FSantaClausABI } from '@/abis/FSantaClaus';
-import { notifications } from '@mantine/notifications';
-import { getBaseUrl } from '@/utils/getBaseUrl';
 
 const FSantaClausStakingAddress = process.env
   .NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS as `0x${string}`;
@@ -189,16 +189,8 @@ export function useEmergencyWithdraw(): {
 }
 
 async function fetchTokenAbi(tokenAddress: string) {
-  const response = await fetch(
-    `${getBaseUrl()}/api/get-abi?tokenAddress=${tokenAddress}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-  const data = await response.json();
+  const data = await getAbi(tokenAddress);
+  console.log('abi_data', data);
 
   if (data.status !== '1') {
     return FSantaClausABI;
