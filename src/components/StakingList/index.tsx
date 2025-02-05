@@ -53,6 +53,9 @@ const StakingList = () => {
   }
 
   const totalPositions = data?.positions.length || 0;
+  const gridSm = totalPositions >= 1 ? 6 : 12;
+  const gridLg = totalPositions >= 2 ? 4 : gridSm;
+  const gridXl = totalPositions >= 3 ? 3 : gridLg;
 
   return (
     <Flex
@@ -74,9 +77,9 @@ const StakingList = () => {
           <Grid>
             <Grid.Col
               span={{
-                sm: totalPositions >= 1 ? 6 : 12,
-                lg: totalPositions >= 2 ? 4 : 6,
-                xl: totalPositions >= 3 ? 3 : 4,
+                sm: gridSm,
+                lg: gridLg,
+                xl: gridXl,
               }}
             >
               <Card
@@ -85,6 +88,11 @@ const StakingList = () => {
                 h='100%'
                 w='100%'
                 withBorder
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
               >
                 <Tooltip
                   label='Stake $FSC'
@@ -125,15 +133,18 @@ const StakingList = () => {
                   key={index}
                   span={{
                     base: 12,
-                    sm: totalPositions >= 1 ? 6 : 12,
-                    lg: totalPositions >= 2 ? 4 : 6,
-                    xl: totalPositions >= 3 ? 3 : 4,
+                    sm: gridSm,
+                    lg: gridLg,
+                    xl: gridXl,
                   }}
                 >
                   <Card
+                    p='xl'
                     withBorder
                     radius='md'
                     className={classes.card}
+                    h='100%'
+                    w='100%'
                   >
                     <Flex direction={{ base: 'column', xs: 'row' }}>
                       <Box>

@@ -2,9 +2,6 @@
   background-color: var(--mantine-color-body);
   overflow: hidden;
   overflow-x: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .label {

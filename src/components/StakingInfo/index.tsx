@@ -20,6 +20,7 @@ const StakingInfo = () => {
         px={{ base: 0, sm: 24, md: 48 }}
         py={{ base: 24 }}
         fluid
+        w={{ base: '100%', md: '90%', lg: '80%', xl: '70%' }}
         style={{
           borderRadius: 14,
           alignSelf: 'center',
