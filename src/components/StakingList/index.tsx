@@ -52,6 +52,8 @@ const StakingList = () => {
     return <StakingCard />;
   }
 
+  const totalPositions = data?.positions.length || 0;
+
   return (
     <Flex
       mah={{
@@ -70,7 +72,13 @@ const StakingList = () => {
       {data !== undefined && (
         <>
           <Grid>
-            <Grid.Col span={{ base: 12, sm: 6, lg: 4, xl: 3 }}>
+            <Grid.Col
+              span={{
+                sm: totalPositions >= 1 ? 6 : 12,
+                lg: totalPositions >= 2 ? 4 : 6,
+                xl: totalPositions >= 3 ? 3 : 4,
+              }}
+            >
               <Card
                 p='xl'
                 className={classes.card}
@@ -115,7 +123,12 @@ const StakingList = () => {
               return (
                 <Grid.Col
                   key={index}
-                  span={{ base: 12, sm: 6, lg: 4, xl: 3 }}
+                  span={{
+                    base: 12,
+                    sm: totalPositions >= 1 ? 6 : 12,
+                    lg: totalPositions >= 2 ? 4 : 6,
+                    xl: totalPositions >= 3 ? 3 : 4,
+                  }}
                 >
                   <Card
                     withBorder

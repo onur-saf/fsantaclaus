@@ -21,6 +21,7 @@ function StakingCard() {
   const [stakeAmount, setStakeAmount] = useState<number | string>(0);
   const [stakePercentage, setStakePercentage] = useState<number>(0);
   // const totalStaked = formatUnits(data ?? BigInt(0), 18);
+
   const { handleApprove } = useApproveFsanta();
   const { stake, isPending } = useStake();
   const { isConnected, address } = useAccount();
