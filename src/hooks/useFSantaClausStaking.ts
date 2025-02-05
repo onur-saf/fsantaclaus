@@ -2,7 +2,6 @@
 
 import { FSantaClausABI } from '@/abis/FSantaClaus';
 import { FSantaClausStakingABI } from '@/abis/FSantaClausStakingABI'; // Import your ABI
-import { getAbi } from '@/server-actions/get-abi';
 import { notifications } from '@mantine/notifications';
 import {
   useReadContract,
@@ -188,31 +187,13 @@ export function useEmergencyWithdraw(): {
   };
 }
 
-async function fetchTokenAbi(tokenAddress: string) {
-  const data = await getAbi(tokenAddress);
-  console.log('abi_data', data);
-
-  if (data.status !== '1') {
-    return FSantaClausABI;
-  }
-
-  return JSON.parse(data.result);
-}
 export function useApproveFsanta() {
   const { writeContractAsync } = useWriteContract();
   const handleApprove = async (amount: bigint) => {
     try {
-      const abi = await fetchTokenAbi(fsantaTokenAddress);
-
-      const approveAbi = abi.find(
-        (fn: { name: string }) => fn.name === 'approve'
-      );
-
-      if (!approveAbi) throw new Error('approve function not found in ABI');
-
       return await writeContractAsync({
         address: fsantaTokenAddress,
-        abi: abi,
+        abi: FSantaClausABI,
         functionName: 'approve',
         args: [FSantaClausStakingAddress, amount],
       });
