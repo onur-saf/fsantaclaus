@@ -48,6 +48,9 @@ function Footer() {
             size='lg'
             color='gray'
             variant='subtle'
+            component={Link}
+            target='_blank'
+            href='https://t.me/fsantaclaus'
           >
             <IconBrandTelegram
               size={18}

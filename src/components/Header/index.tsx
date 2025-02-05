@@ -58,6 +58,7 @@ function Header() {
 
             <Link
               href='https://fsantaclaus.gitbook.io/fcs'
+              target='_blank'
               className={classes.link}
             >
               Whitepaper

@@ -3,15 +3,23 @@
 import { Button, Text } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { modals } from '@mantine/modals';
-import { baseSepolia } from 'viem/chains';
+import { base, baseSepolia } from 'viem/chains';
 import { useAccount, useDisconnect } from 'wagmi';
 
 export function ConnectButton({ onClick }: { onClick?: () => void }) {
   const { disconnectAsync } = useDisconnect();
   const { isConnected, address, chain } = useAccount();
   const { hovered, ref } = useHover();
+  const env = process.env.APP_ENV;
+  const isSupportedChain =
+    chain &&
+    (env === 'testnet'
+      ? chain.id === baseSepolia.id
+      : env === 'mainnet'
+      ? chain.id === base.id
+      : false);
 
-  if (chain && chain?.id !== baseSepolia.id) {
+  if (isConnected && !isSupportedChain) {
     return <Text>Unsupported chain</Text>;
   }
 
