@@ -6,7 +6,6 @@ const appEnv = process.env.APP_ENV || 'testnet';
 const env = fs.readFileSync(`.env.${appEnv}`);
 
 const config = dotenv.parse(env);
-console.log(`Using .env.${appEnv} file`);
 
 const nextConfig: NextConfig = {
   /* config options here */
