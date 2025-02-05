@@ -10,7 +10,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { parseEther } from 'viem';
-import { baseSepolia } from 'viem/chains';
+import { base } from 'viem/chains';
 import { useAccount, useBalance, useBlockNumber } from 'wagmi';
 
 function StakingCard() {
@@ -27,7 +27,7 @@ function StakingCard() {
   const { data: blockNumber } = useBlockNumber({ watch: true });
   const { data: fsantaTokenAmount, queryKey } = useBalance({
     address,
-    chainId: baseSepolia.id,
+    chainId: base.id,
     token: fsantaTokenAddress,
     unit: 'ether',
   });
