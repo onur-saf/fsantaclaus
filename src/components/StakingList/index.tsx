@@ -20,12 +20,17 @@ import {
 } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { IconBriefcase, IconPlus } from '@tabler/icons-react';
+import utc from 'dayjs/plugin/utc';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { formatUnits } from 'viem';
 import { useAccount } from 'wagmi';
 import StakingCard from '../StakingCard';
 import classes from './StakingList.module.css';
+
+dayjs.extend(utc);
+dayjs.extend(localizedFormat);
 
 const StakingList = () => {
   const { address, isConnected } = useAccount();
@@ -197,9 +202,7 @@ const StakingList = () => {
                       <Group mt='lg'>
                         <div>
                           <Text className={classes.label}>
-                            {dayjs(stakedAt * 1000).format(
-                              'YYYY-MM-DDTHH:mm:ssZ[Z]'
-                            )}
+                            {dayjs.utc(stakedAt * 1000).format('LLL')}
                           </Text>
                           <Text
                             size='xs'
