@@ -18,8 +18,8 @@ const queryClient = new QueryClient({
 });
 
 const config = getDefaultConfig({
-  appName: 'My RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID',
+  appName: 'FSanta Claus Staking',
+  projectId: '2871ba69c10c6c0612dcc28da2dcceaa',
   chains: [process.env.NEXT_PUBLIC_NETWORK === 'mainnet' ? base : baseSepolia],
   ssr: true,
 });
