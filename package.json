@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "dev:testnet": "cross-env APP_ENV=testnet next dev --turbopack",
-    "dev:mainnet": "cross-env APP_ENV=mainnet next dev --turbopack",
+    "dev:testnet": "cross-env NETWORK=testnet next dev --turbopack",
+    "dev:mainnet": "cross-env NETWORK=mainnet next dev --turbopack",
     "build": "next build",
-    "build:testnet": "cross-env APP_ENV=testnet next build",
-    "build:mainnet": "cross-env APP_ENV=mainnet next build",
+    "build:testnet": "cross-env NETWORK=testnet next build",
+    "build:mainnet": "cross-env NETWORK=mainnet next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -18,6 +18,7 @@
     "@mantine/modals": "^7.16.2",
     "@mantine/notifications": "^7.16.2",
     "@next/env": "^15.1.6",
+    "@rainbow-me/rainbowkit": "^2.2.3",
     "@tabler/icons-react": "^3.29.0",
     "@tanstack/react-query": "^5.66.0",
     "autoprefixer": "^10.4.20",
@@ -27,8 +28,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-preset-mantine": "^1.2.1",
-    "viem": "^2.22.17",
-    "wagmi": "^2.14.9"
+    "viem": "^2.22.22",
+    "wagmi": "^2.14.10"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

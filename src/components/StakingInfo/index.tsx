@@ -9,16 +9,16 @@ const StakingInfo = () => {
 
   return (
     <Flex
+      direction='column'
       justify='center'
       align='center'
+      h={{ base: '70vh', md: '90vh' }}
       mx={{ base: 12 }}
-      h='100%'
-      direction='column'
     >
       {isConnecting ? (
         <Skeleton
-          width={120}
-          height={24}
+          width={400}
+          height={400}
           radius='xl'
         />
       ) : isConnected ? (

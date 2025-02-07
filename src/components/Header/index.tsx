@@ -11,8 +11,9 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
-import { ConnectButton } from '../ConnectButton';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import classes from './Header.module.css';
+import Footer from '../Footer';
 
 function Header() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -65,8 +66,12 @@ function Header() {
             </Link>
           </Group>
 
-          <Group visibleFrom='sm'>
-            <ConnectButton />
+          <Group>
+            <ConnectButton
+              showBalance={false}
+              accountStatus={'full'}
+              chainStatus='icon'
+            />
           </Group>
 
           <Burger
@@ -107,18 +112,7 @@ function Header() {
 
           <Divider my='sm' />
 
-          <Group
-            justify='center'
-            grow
-            pb='xl'
-            px='md'
-          >
-            <ConnectButton
-              onClick={() => {
-                closeDrawer();
-              }}
-            />
-          </Group>
+          <Footer />
         </ScrollArea>
       </Drawer>
     </>

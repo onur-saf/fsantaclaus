@@ -1,8 +1,6 @@
-@import '@mantine/core/styles.layer.css';
-
 :root {
-  --mantine-color-body: #202124;
-  --mantine-color-text: #fba0a0;
+  --mantine-color-body: #202124 !important;
+  --mantine-color-text: #fba0a0 !important;
 }
 
 html,
@@ -12,9 +10,9 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed; */
-  height: 100vh;
-  position: relative;
-  margin: 0;
+  height: 100vh !important;
+  position: relative !important;
+  margin: 0 !important;
 }
 
 *,

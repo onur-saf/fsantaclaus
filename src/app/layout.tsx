@@ -1,10 +1,15 @@
 import { Providers } from '@/components/providers';
+import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
+
 import { ModalsProvider } from '@mantine/modals';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+
+import '@rainbow-me/rainbowkit/styles.css';
 import './globals.css';
 
-import ConnectWalletModal from '@/components/ConnectWalletModal';
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { theme } from '@/utils/theme';
 import {
@@ -12,8 +17,8 @@ import {
   MantineProvider,
   mantineHtmlProps,
 } from '@mantine/core';
-import Footer from '@/components/Footer';
 import Image from 'next/image';
+import { Notifications } from '@mantine/notifications';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -69,9 +74,6 @@ export default function RootLayout({
             forceColorScheme='dark'
           >
             <ModalsProvider
-              modals={{
-                connectWallet: ConnectWalletModal,
-              }}
               modalProps={{
                 transitionProps: {
                   transition: 'fade',
@@ -83,6 +85,10 @@ export default function RootLayout({
                 },
               }}
             >
+              <Notifications
+                autoClose={false}
+                limit={5}
+              />
               <Header />
               <Image
                 style={{

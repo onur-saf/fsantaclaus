@@ -1,48 +1,46 @@
+'use client';
 import {
   fsantaTokenAddress,
-  useApproveFsanta,
-  useStake,
+  useFSCBalance,
+  useStakePosition,
+  useTotalStaked,
 } from '@/hooks/useFSantaClausStaking';
 import {
   Button,
   Container,
   Flex,
   NumberInput,
+  Skeleton,
   Slider,
   Text,
   Title,
 } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { modals } from '@mantine/modals';
-import { useQueryClient } from '@tanstack/react-query';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { parseEther } from 'viem';
-import { base } from 'viem/chains';
-import { useAccount, useBalance, useBlockNumber } from 'wagmi';
+import { useCallback, useState } from 'react';
+import { formatUnits, parseEther } from 'viem';
+import { useAccount } from 'wagmi';
 
 function StakingCard() {
-  const queryClient = useQueryClient();
-  // const { data } = useTotalStaked();
   const { hovered, ref } = useHover();
   const [stakeAmount, setStakeAmount] = useState<number | string>(0);
   const [stakePercentage, setStakePercentage] = useState<number>(0);
-  // const totalStaked = formatUnits(data ?? BigInt(0), 18);
+  const { balance, refetch: refetchBalance } = useFSCBalance();
+  const { data, refetch, isFetching: isFetchingTotalStaked } = useTotalStaked();
+  const totalStaked = formatUnits(data ?? BigInt(0), 18);
 
-  const { handleApprove } = useApproveFsanta();
-  const { stake, isPending } = useStake();
-  const { isConnected, address } = useAccount();
-  const { data: blockNumber } = useBlockNumber({ watch: true });
-  const { data: fsantaTokenAmount, queryKey } = useBalance({
-    address,
-    chainId: base.id,
-    token: fsantaTokenAddress,
-    unit: 'ether',
+  const onSuccess = useCallback(() => {
+    refetch();
+    refetchBalance();
+  }, [refetch, refetchBalance]);
+
+  const { stakePosition, isStakePending } = useStakePosition({
+    onSuccess,
   });
-
-  useEffect(() => {
-    queryClient.invalidateQueries({ queryKey });
-  }, [blockNumber]);
+  const { isConnected } = useAccount();
+  const { openConnectModal } = useConnectModal();
 
   return (
     <Container
@@ -69,16 +67,11 @@ function StakingCard() {
       >
         <Slider
           color='#fba0a0'
-          defaultValue={0}
+          defaultValue={0.0}
           size='lg'
           onChange={(value) => {
             setStakePercentage(value);
-            setStakeAmount(
-              (
-                (Number(fsantaTokenAmount?.formatted ?? 0) * value) /
-                100
-              ).toFixed(2)
-            );
+            setStakeAmount((parseFloat(balance) * value) / 100);
           }}
           value={stakePercentage}
           marks={[
@@ -108,11 +101,8 @@ function StakingCard() {
         <NumberInput
           onChange={(value) => {
             setStakeAmount(value);
-            setStakePercentage(
-              (Number(value) / Number(fsantaTokenAmount?.formatted ?? 0)) * 100
-            );
+            setStakePercentage((Number(value) / parseFloat(balance)) * 100);
           }}
-          decimalScale={2}
           allowDecimal
           fixedDecimalScale
           suffix=' $FSC'
@@ -120,12 +110,11 @@ function StakingCard() {
           defaultValue={0}
           thousandSeparator=','
           min={0}
-          max={Number(fsantaTokenAmount?.formatted ?? 0)}
-          step={1}
+          max={parseFloat(balance)}
         />
 
         <Button
-          loading={isPending}
+          loading={isStakePending}
           gradient={
             hovered
               ? {
@@ -138,14 +127,8 @@ function StakingCard() {
           ref={ref}
           onClick={async () => {
             if (!isConnected) {
-              modals.openContextModal({
-                modal: 'connectWallet',
-                title: 'Connect Wallet',
-                padding: '16px 24px 36px 24px',
-                centered: true,
-                innerProps: {},
-              });
-            } else if (Number(fsantaTokenAmount?.formatted ?? 0) === 0) {
+              openConnectModal?.();
+            } else if (parseFloat(balance) === 0) {
               modals.open({
                 title: 'Insufficient Funds ($FSC)',
                 centered: true,
@@ -165,8 +148,7 @@ function StakingCard() {
               });
             } else {
               try {
-                await handleApprove(parseEther(stakeAmount.toString()));
-                stake(parseEther(stakeAmount.toString()));
+                await stakePosition(parseEther(stakeAmount.toString()));
               } catch (error) {
                 console.log('error', error);
               }
@@ -176,6 +158,21 @@ function StakingCard() {
           Stake FSanta Claus Tokens
         </Button>
       </Flex>
+
+      {isFetchingTotalStaked ? (
+        <Skeleton
+          height={40}
+          mt={12}
+          width='100%'
+        />
+      ) : (
+        <Text
+          mt={12}
+          ta='center'
+        >
+          Total Staked: {parseFloat(totalStaked).toFixed(4)} $FSC
+        </Text>
+      )}
     </Container>
   );
 }

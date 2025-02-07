@@ -1,91 +1,40 @@
 export const FSantaClausStakingABI = [
+  { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
   {
-    inputs: [],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'target',
-        type: 'address',
-      },
-    ],
+    inputs: [{ internalType: 'address', name: 'target', type: 'address' }],
     name: 'AddressEmptyCode',
     type: 'error',
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: 'implementation',
-        type: 'address',
-      },
+      { internalType: 'address', name: 'implementation', type: 'address' },
     ],
     name: 'ERC1967InvalidImplementation',
     type: 'error',
   },
+  { inputs: [], name: 'ERC1967NonPayable', type: 'error' },
+  { inputs: [], name: 'FailedCall', type: 'error' },
+  { inputs: [], name: 'InvalidInitialization', type: 'error' },
+  { inputs: [], name: 'NotInitializing', type: 'error' },
   {
-    inputs: [],
-    name: 'ERC1967NonPayable',
-    type: 'error',
-  },
-  {
-    inputs: [],
-    name: 'FailedCall',
-    type: 'error',
-  },
-  {
-    inputs: [],
-    name: 'InvalidInitialization',
-    type: 'error',
-  },
-  {
-    inputs: [],
-    name: 'NotInitializing',
-    type: 'error',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'owner',
-        type: 'address',
-      },
-    ],
+    inputs: [{ internalType: 'address', name: 'owner', type: 'address' }],
     name: 'OwnableInvalidOwner',
     type: 'error',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
-      },
-    ],
+    inputs: [{ internalType: 'address', name: 'account', type: 'address' }],
     name: 'OwnableUnauthorizedAccount',
     type: 'error',
   },
+  { inputs: [], name: 'ReentrancyGuardReentrantCall', type: 'error' },
   {
-    inputs: [],
-    name: 'ReentrancyGuardReentrantCall',
+    inputs: [{ internalType: 'address', name: 'token', type: 'address' }],
+    name: 'SafeERC20FailedOperation',
     type: 'error',
   },
+  { inputs: [], name: 'UUPSUnauthorizedCallContext', type: 'error' },
   {
-    inputs: [],
-    name: 'UUPSUnauthorizedCallContext',
-    type: 'error',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'bytes32',
-        name: 'slot',
-        type: 'bytes32',
-      },
-    ],
+    inputs: [{ internalType: 'bytes32', name: 'slot', type: 'bytes32' }],
     name: 'UUPSUnsupportedProxiableUUID',
     type: 'error',
   },
@@ -100,6 +49,26 @@ export const FSantaClausStakingABI = [
       },
     ],
     name: 'AirdropPoolUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'position',
+        type: 'uint256',
+      },
+    ],
+    name: 'Claimed',
     type: 'event',
   },
   {
@@ -150,12 +119,7 @@ export const FSantaClausStakingABI = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'user',
-        type: 'address',
-      },
+      { indexed: true, internalType: 'address', name: 'user', type: 'address' },
       {
         indexed: false,
         internalType: 'uint256',
@@ -175,12 +139,7 @@ export const FSantaClausStakingABI = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'user',
-        type: 'address',
-      },
+      { indexed: true, internalType: 'address', name: 'user', type: 'address' },
       {
         indexed: false,
         internalType: 'uint256',
@@ -213,87 +172,42 @@ export const FSantaClausStakingABI = [
   {
     inputs: [],
     name: 'COOLDOWN_PERIOD',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'POSITIONS_PER_PAGE',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'UPGRADE_INTERFACE_VERSION',
-    outputs: [
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
-    ],
+    outputs: [{ internalType: 'string', name: '', type: 'string' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'airdropPool',
-    outputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
+    outputs: [{ internalType: 'address', name: '', type: 'address' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: '_user',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: '_positionIndex',
-        type: 'uint256',
-      },
+      { internalType: 'uint256', name: '_positionIndex', type: 'uint256' },
     ],
-    name: 'canUnstakePosition',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
-    stateMutability: 'view',
+    name: 'claimPosition',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_token',
-        type: 'address',
-      },
-    ],
+    inputs: [{ internalType: 'address', name: '_token', type: 'address' }],
     name: 'emergencyWithdraw',
     outputs: [],
     stateMutability: 'nonpayable',
@@ -302,81 +216,35 @@ export const FSantaClausStakingABI = [
   {
     inputs: [],
     name: 'fsantaClausToken',
-    outputs: [
-      {
-        internalType: 'contract IERC20',
-        name: '',
-        type: 'address',
-      },
-    ],
+    outputs: [{ internalType: 'contract IERC20', name: '', type: 'address' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_user',
-        type: 'address',
-      },
-    ],
+    inputs: [{ internalType: 'address', name: '_user', type: 'address' }],
     name: 'getActivePositionsCount',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: '_user',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: '_positionIndex',
-        type: 'uint256',
-      },
+      { internalType: 'address', name: '_user', type: 'address' },
+      { internalType: 'uint256', name: '_positionIndex', type: 'uint256' },
     ],
     name: 'getPosition',
     outputs: [
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'timestamp',
-        type: 'uint256',
-      },
-      {
-        internalType: 'bool',
-        name: 'isActive',
-        type: 'bool',
-      },
+      { internalType: 'uint256', name: 'amount', type: 'uint256' },
+      { internalType: 'uint256', name: 'timestamp', type: 'uint256' },
+      { internalType: 'bool', name: 'isActive', type: 'bool' },
     ],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: '_user',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: '_page',
-        type: 'uint256',
-      },
+      { internalType: 'address', name: '_user', type: 'address' },
+      { internalType: 'uint256', name: '_page', type: 'uint256' },
     ],
     name: 'getStakePositionsPaginated',
     outputs: [
@@ -384,43 +252,43 @@ export const FSantaClausStakingABI = [
         components: [
           {
             components: [
-              {
-                internalType: 'uint256',
-                name: 'amount',
-                type: 'uint256',
-              },
-              {
-                internalType: 'uint256',
-                name: 'timestamp',
-                type: 'uint256',
-              },
-              {
-                internalType: 'bool',
-                name: 'isActive',
-                type: 'bool',
-              },
+              { internalType: 'uint256', name: 'amount', type: 'uint256' },
+              { internalType: 'uint256', name: 'timestamp', type: 'uint256' },
+              { internalType: 'bool', name: 'isActive', type: 'bool' },
             ],
-            internalType: 'struct FSantaClausStaking.StakePosition[]',
+            internalType: 'struct FSantaClausStakingV2.StakePosition[]',
             name: 'positions',
             type: 'tuple[]',
           },
           {
-            internalType: 'uint256',
-            name: 'totalPages',
-            type: 'uint256',
+            components: [
+              {
+                internalType: 'uint256',
+                name: 'unstakeTimestamp',
+                type: 'uint256',
+              },
+              {
+                internalType: 'uint256',
+                name: 'claimTimestamp',
+                type: 'uint256',
+              },
+              { internalType: 'uint256', name: '__gap', type: 'uint256' },
+              { internalType: 'uint256', name: '__gap2', type: 'uint256' },
+              {
+                internalType: 'enum FSantaClausStakingV2.Status',
+                name: 'status',
+                type: 'uint8',
+              },
+            ],
+            internalType: 'struct FSantaClausStakingV2.StakeMetadata[]',
+            name: 'positionMetadata',
+            type: 'tuple[]',
           },
-          {
-            internalType: 'uint256',
-            name: 'currentPage',
-            type: 'uint256',
-          },
-          {
-            internalType: 'uint256',
-            name: 'totalPositions',
-            type: 'uint256',
-          },
+          { internalType: 'uint256', name: 'totalPages', type: 'uint256' },
+          { internalType: 'uint256', name: 'currentPage', type: 'uint256' },
+          { internalType: 'uint256', name: 'totalPositions', type: 'uint256' },
         ],
-        internalType: 'struct FSantaClausStaking.PaginatedPositions',
+        internalType: 'struct FSantaClausStakingV2.PaginatedPositions',
         name: '',
         type: 'tuple',
       },
@@ -429,36 +297,16 @@ export const FSantaClausStakingABI = [
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_user',
-        type: 'address',
-      },
-    ],
+    inputs: [{ internalType: 'address', name: '_user', type: 'address' }],
     name: 'getUserTotalStake',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: '_fsantaClausToken',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: '_airdropPool',
-        type: 'address',
-      },
+      { internalType: 'address', name: '_fsantaClausToken', type: 'address' },
+      { internalType: 'address', name: '_airdropPool', type: 'address' },
     ],
     name: 'initialize',
     outputs: [],
@@ -468,26 +316,14 @@ export const FSantaClausStakingABI = [
   {
     inputs: [],
     name: 'owner',
-    outputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
+    outputs: [{ internalType: 'address', name: '', type: 'address' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'proxiableUUID',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
+    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
     stateMutability: 'view',
     type: 'function',
   },
@@ -499,52 +335,48 @@ export const FSantaClausStakingABI = [
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_newPool',
-        type: 'address',
-      },
-    ],
+    inputs: [{ internalType: 'address', name: '_newPool', type: 'address' }],
     name: 'setAirdropPool',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '_amount',
-        type: 'uint256',
-      },
-    ],
+    inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
     name: 'stake',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
-    inputs: [],
-    name: 'totalStaked',
+    inputs: [
+      { internalType: 'address', name: '', type: 'address' },
+      { internalType: 'uint256', name: '', type: 'uint256' },
+    ],
+    name: 'stakeMetadata',
     outputs: [
+      { internalType: 'uint256', name: 'unstakeTimestamp', type: 'uint256' },
+      { internalType: 'uint256', name: 'claimTimestamp', type: 'uint256' },
+      { internalType: 'uint256', name: '__gap', type: 'uint256' },
+      { internalType: 'uint256', name: '__gap2', type: 'uint256' },
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        internalType: 'enum FSantaClausStakingV2.Status',
+        name: 'status',
+        type: 'uint8',
       },
     ],
     stateMutability: 'view',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
-      },
-    ],
+    inputs: [],
+    name: 'totalStaked',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'address', name: 'newOwner', type: 'address' }],
     name: 'transferOwnership',
     outputs: [],
     stateMutability: 'nonpayable',
@@ -552,11 +384,7 @@ export const FSantaClausStakingABI = [
   },
   {
     inputs: [
-      {
-        internalType: 'uint256',
-        name: '_positionIndex',
-        type: 'uint256',
-      },
+      { internalType: 'uint256', name: '_positionIndex', type: 'uint256' },
     ],
     name: 'unstakePosition',
     outputs: [],
@@ -565,16 +393,8 @@ export const FSantaClausStakingABI = [
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: 'newImplementation',
-        type: 'address',
-      },
-      {
-        internalType: 'bytes',
-        name: 'data',
-        type: 'bytes',
-      },
+      { internalType: 'address', name: 'newImplementation', type: 'address' },
+      { internalType: 'bytes', name: 'data', type: 'bytes' },
     ],
     name: 'upgradeToAndCall',
     outputs: [],
@@ -582,25 +402,11 @@ export const FSantaClausStakingABI = [
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
+    inputs: [{ internalType: 'address', name: '', type: 'address' }],
     name: 'userStakes',
     outputs: [
-      {
-        internalType: 'bool',
-        name: 'isStaking',
-        type: 'bool',
-      },
-      {
-        internalType: 'uint256',
-        name: 'totalStaked',
-        type: 'uint256',
-      },
+      { internalType: 'bool', name: 'isStaking', type: 'bool' },
+      { internalType: 'uint256', name: 'totalStaked', type: 'uint256' },
       {
         internalType: 'uint256',
         name: 'activePositionsCount',
@@ -613,13 +419,7 @@ export const FSantaClausStakingABI = [
   {
     inputs: [],
     name: 'version',
-    outputs: [
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
-    ],
+    outputs: [{ internalType: 'string', name: '', type: 'string' }],
     stateMutability: 'pure',
     type: 'function',
   },
