@@ -94,8 +94,9 @@ export default function RootLayout({
                 style={{
                   zIndex: -1,
                   objectFit: 'cover',
+                  aspectRatio: '16/9',
                 }}
-                src='/bg.jpeg'
+                src='/bg3.jpeg'
                 alt='bg'
                 priority
                 fill
