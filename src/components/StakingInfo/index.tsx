@@ -14,6 +14,7 @@ const StakingInfo = () => {
       align='center'
       h={{ base: '70vh', md: '90vh' }}
       mx={{ base: 12 }}
+      opacity={0.9}
     >
       {isConnecting ? (
         <Skeleton
